@@ -1,1 +1,1 @@
-# Interpreter for blazy language written using golang as base language
+# Interpreter for blazy language
