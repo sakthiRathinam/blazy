@@ -10,16 +10,19 @@ type Lexer struct {
 }
 
 func NewLexer(input string) *Lexer {
-	return &Lexer{input: input, position: 0, readPosition: 0}
+	lexerPtr := &Lexer{input: input, position: 0, readPosition: 0}
+	lexerPtr.readChar()
+	return lexerPtr
 }
 
 func (l *Lexer) readChar() {
 	if (l.readPosition) >= len(l.input) {
 		l.ch = 0
+	} else {
+		l.ch = l.input[l.readPosition]
 	}
 
 	l.position = l.readPosition
-	l.ch = l.input[l.readPosition]
 	l.readPosition++
 }
 
