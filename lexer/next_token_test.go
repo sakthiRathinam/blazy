@@ -6,13 +6,15 @@ import (
 	token "github.com/sakthiRathinam/blazy/token"
 )
 
-func TestNextToken(t *testing.T) {
-	input := "=+(){},;"
+type testToken struct {
+	expectedType    token.TokenType
+	expectedLiteral string
+}
 
-	tests := []struct {
-		expectedType    token.TokenType
-		expectedLiteral string
-	}{
+func TestNextToken(t *testing.T) {
+
+	baseTestInput := "=+(){},;"
+	baseTestTokens := []testToken{
 		{token.ASSIGN, "="},
 		{token.PLUS, "+"},
 		{token.LPAREN, "("},
@@ -22,14 +24,18 @@ func TestNextToken(t *testing.T) {
 		{token.COMMA, ","},
 		{token.SEMICOLON, ";"},
 	}
+	tests := []struct {
+		testTokens []testToken
+		input      string
+	}{{testTokens: baseTestTokens, input: baseTestInput}}
 
-	l := NewLexer(input)
-
-	for _, tt := range tests {
-		tok := l.NextToken()
-
-		if tok.Type != tt.expectedType || tt.expectedLiteral != tok.Literal {
-			t.Fail()
+	for _, test := range tests {
+		l := NewLexer(test.input)
+		for _, tt := range test.testTokens {
+			tok := l.NextToken()
+			if tok.Type != tt.expectedType || tt.expectedLiteral != tok.Literal {
+				t.Fail()
+			}
 		}
 	}
 }
