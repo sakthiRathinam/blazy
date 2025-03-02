@@ -31,6 +31,22 @@ const (
 	// Keywords
 	FUNCTION = "FUNCTION"
 	LET      = "LET"
+	TRUE     = "TRUE"
+	FALSE    = "FALSE"
+	IF       = "IF"
+	ELSE     = "ELSE"
+	RETURN   = "RETURN"
+	// Operators
+	BANG     = "!"
+	MINUS    = "-"
+	SLASH    = "/"
+	ASTERISK = "*"
+	LT       = "<"
+	GT       = ">"
+	EQ       = "=="
+	NOT_EQ   = "!="
+	EQ_GT    = ">="
+	EQ_LT    = "<="
 )
 
 var Keywords = map[string]TokenType{"fn": FUNCTION, "let": LET}
